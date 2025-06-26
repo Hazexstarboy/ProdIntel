@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}
+    Add Job Entry
+{% endblock %}
+{% block content %}
+    <h1>Add Job Entry</h1>
+    <form method="post" class="form">
+        <label for="job_name" class="form-label">Job Name :
+            <input type="text" name="job_name" id="job_name" class="form-control" required>
+        </label>
+        <label for="job_description" class="form-label">Description :
+            <input type="text" name="job_description" id="job_description" class="form-control" required>
+        </label>
+        <label for="deadline_date" class="form-label">Completion Date :
+            <input type="date" name="deadline_date" id="deadline_date" class="form-control" required>   
+        </label>
+        <label for="deadline_time" class="form-label">Completion Time :
+            <input type="time" name="deadline_time" id="deadline_time" class="form-control" required>
+        </label>
+        <br>
+        <input type="submit" value="save" class="btn btn-success">
+    </form>
+{% endblock %}
+
+{% block style %}
+    <style>
+        form{
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1{
+            margin-top: 64px;
+            text-align: center;
+        }
+    </style>    
+{% endblock %}

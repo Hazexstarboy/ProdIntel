@@ -1,0 +1,198 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Procedure
+{% endblock %}
+
+{% block content %}
+<br>
+{% if user.is_admin %}
+    <br>
+    <br>
+    <div class="Add" style="align-items: end;">
+        <a class="btn btn-success" href="{{url_for('add_procedure')}}">
+            <i class="fa fa-plus fa-xs"></i>
+            Add Procedure
+        </a>
+    </div>
+    <br>
+    <div class="heading">
+        <h3 style="text-align: left;">Production</h3>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Procedure Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time Required (in Hrs)</th>
+                <th scope="col">Man Power</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set counter = namespace(value=1) %}
+            {% for procedure in procedures %}
+                {% if procedure.procedure_is_prod == True %}
+                    <tr>
+                        <th scope="row">{{ counter.value }}</th>
+                        <td>{{ procedure.sequence }}</td>
+                        <td>{{ procedure.procedure_name }}</td>
+                        <td>{{ procedure.procedure_description }}</td>
+                        <td><strong>{{ procedure.procedure_plantime }} hrs</strong></td>
+                        <td><strong>{{ procedure.procedure_planmanpower }}</strong></td>
+                        <td>
+                            <a class="btn btn-primary" href="{{url_for('edit_procedure', id = procedure.id)}}">
+                                <i class="fas fa-edit fa-xs"></i>
+                                Edit
+                            </a>
+                            <a class="btn btn-danger" href="{{url_for('delete_procedure', id = procedure.id)}}">
+                                <i class="fas fa-trash fa-xs"></i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% set counter.value = counter.value + 1 %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <div class="heading">
+        <h3 style="text-align: left;">Store</h3>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Procedure Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time Required (in Hrs)</th>
+                <th scope="col">Man Power</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set counter = namespace(value=1) %}
+            {% for procedure in procedures %}
+                {% if procedure.procedure_is_store == True %}
+                    <tr>
+                        <th scope="row">{{ counter.value }}</th>
+                        <td>{{ procedure.sequence }}</td>
+                        <td>{{ procedure.procedure_name }}</td>
+                        <td>{{ procedure.procedure_description }}</td>
+                        <td><strong>{{ procedure.procedure_plantime }} hrs</strong></td>
+                        <td><strong>{{ procedure.procedure_planmanpower }}</strong></td>
+                        <td>
+                            <a class="btn btn-primary" href="{{url_for('edit_procedure', id = procedure.id)}}">
+                                <i class="fas fa-edit fa-xs"></i>
+                                Edit
+                            </a>
+                            <a class="btn btn-danger" href="{{url_for('delete_procedure', id = procedure.id)}}">
+                                <i class="fas fa-trash fa-xs"></i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% set counter.value = counter.value + 1 %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if user.is_prodmanager or user.is_storemanager %}
+<br>
+<div class="heading">
+    <h3 style="text-align:left">Procedure</h3>
+    <div class="Add">
+        <a class="btn btn-success" href="{{url_for('add_procedure')}}">
+            <i class="fa fa-plus fa-xs"></i>
+            Add Procedure
+        </a>
+    </div>
+</div>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Sequence</th>
+            <th scope="col">Procedure Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Time Required (in Hrs)</th>
+            <th scope="col">Man Power</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set counter = namespace(value=1) %}
+        {% for procedure in procedures %}
+            {% if user.is_prodmanager and procedure.procedure_is_prod == True %}
+                <tr>
+                    <th scope="row">{{ counter.value }}</th>
+                    <td>{{ procedure.sequence }}</td>
+                    <td>{{ procedure.procedure_name }}</td>
+                    <td>{{ procedure.procedure_description }}</td>
+                    <td><strong>{{ procedure.procedure_plantime }} hrs</strong></td>
+                    <td><strong>{{ procedure.procedure_planmanpower }}</strong></td>
+                    <td>
+                        <a class="btn btn-primary" href="{{url_for('edit_procedure', id = procedure.id)}}">
+                            <i class="fas fa-edit fa-xs"></i>
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" href="{{url_for('delete_procedure', id = procedure.id)}}">
+                            <i class="fas fa-trash fa-xs"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% set counter.value = counter.value + 1 %}
+            {% elif user.is_storemanager and procedure.procedure_is_store == True %}
+                <tr>
+                    <th scope="row">{{ counter.value }}</th>
+                    <td>{{ procedure.sequence }}</td>
+                    <td>{{ procedure.procedure_name }}</td>
+                    <td>{{ procedure.procedure_description }}</td>
+                    <td><strong>{{ procedure.procedure_plantime }} hrs</strong></td>
+                    <td><strong>{{ procedure.procedure_planmanpower }}</strong></td>
+                    <td>
+                        <a class="btn btn-primary" href="{{url_for('edit_procedure', id = procedure.id)}}">
+                            <i class="fas fa-edit fa-xs"></i>
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" href="{{url_for('delete_procedure', id = procedure.id)}}">
+                            <i class="fas fa-trash fa-xs"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% set counter.value = counter.value + 1 %}
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
+
+{% block style %}
+    <style>
+        .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .Add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1,h2 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}

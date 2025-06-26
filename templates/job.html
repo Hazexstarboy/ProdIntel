@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Production Job Entry
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_admin or user.is_prodmanager %}
+<br>
+<div class="heading">
+    <h3 style="text-align:left;">Jobs</h3>
+    <div class="Add">
+        <a class="btn btn-success" href="{{url_for('add_job')}}">
+            <i class="fa fa-plus fa-xs"></i>
+            Add Job
+        </a>
+    </div>
+</div>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Job Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Completion Date</th>
+            <th scope="col">Completion Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set counter = namespace(value=1) %}
+        {% for job in jobs %}
+            <tr>
+                <th scope="row">{{ counter.value }}</th>
+                <td>{{ job.job_name }}</td>
+                <td>{{ job.job_description }}</td>
+                <td>{{ job.deadline_date }}</td>
+                <td>{{ job.deadline_time }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{url_for('edit_job', id = job.id)}}">
+                        <i class="fas fa-edit fa-xs"></i>
+                        Edit
+                    </a>
+                    <a class="btn btn-danger" href="{{url_for('delete_job', id = job.id)}}">
+                        <i class="fas fa-trash fa-xs"></i>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% set counter.value = counter.value + 1 %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
+
+{% block style %}
+    <style>
+        .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .Add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1,h2 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}

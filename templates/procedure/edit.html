@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block title %}
+    Edit Procedure
+{% endblock %}
+{% block content %}
+    <h1>Edit Procedure</h1>
+    <form method="post" class="form">
+        <label for="sequence" class="form-label">Sequence :
+            <input type="number" name="sequence" id="sequence" class="form-control" value="{{procedure.sequence}}" required>
+        </label>
+        <label for="procedure_name" class="form-label">Procedure Name :
+            <input type="text" name="procedure_name" id="procedure_name" class="form-control" value="{{procedure.procedure_name}}" required>
+        </label>
+        <label for="procedure_description" class="form-label">Description :
+            <input type="text" name="procedure_description" id="procedure_description" class="form-control" value="{{procedure.procedure_description}}" required>
+        </label>
+        <label for="procedure_plantime" class="form-label">Time Required (in Hrs):
+            <input type="number" name="procedure_plantime" id="procedure_plantime" class="form-control" value="{{procedure.procedure_plantime}}" required>   
+        </label>
+        <label for="procedure_planmanpower" class="form-label">Man Power :
+            <input type="number" name="procedure_planmanpower" id="procedure_planmanpower" class="form-control" value="{{procedure.procedure_planmanpower}}" required>
+        </label>
+        <br>
+        <input type="submit" value="save" class="btn btn-success">
+    </form>
+{% endblock %}
+
+{% block style %}
+    <style>
+        form{
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1{
+            margin-top: 64px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}

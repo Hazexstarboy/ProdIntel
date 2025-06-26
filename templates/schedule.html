@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Production Schedule
+{% endblock %}
+
+{% block content %}
+<br>
+{% if user.is_admin or user.is_prodmanager or user.is_prodsupervisor %}
+    <br>
+    <br>
+    <div class="heading">
+        <h3 style="text-align: left;">Production Schedule</h3>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Job</th>
+                <th scope="col">Procedure</th>
+                <th scope="col">Start</th>
+                <th scope="col">End</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set counter = namespace(value=1) %}
+            {% for schedule in schedules %}
+                <tr>
+                    <th scope="row">{{ counter.value }}</th>
+                    <td>{{ schedule.job_name }}</td>
+                    <td>{{ schedule.procedure_name }}</td>
+                    <td>{{ schedule.start_datetime }}</td>
+                    <td>{{ schedule.end_datetime }}</td>
+                </tr>
+                {% set counter.value = counter.value + 1 %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
+
+{% block style %}
+    <style>
+        .heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .Add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1,h2 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}

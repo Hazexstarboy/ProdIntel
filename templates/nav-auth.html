@@ -1,0 +1,172 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if 'user_id' in session %}
+                    {% if user.is_admin %}
+                        <div class="admin_nav">
+                            <li class="navbar-brand" href="/"><strong>JHONSON</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('admin')}}">Home</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('schedule')}}">Schedule</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('progress')}}">Progress</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('job')}}">Job</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('procedure')}}">Procedure</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('profile')}}">Profile</a>
+                                </li>
+                            </b>
+                        </div>
+                    {% elif user.is_prodmanager or user.is_prodsupervisor %}
+                        <div class="admin_nav">
+                            <li class="navbar-brand" href="/"><strong>JHONSON</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('prodmanager')}}">Home</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('schedule')}}">Schedule</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('progress')}}">Progress</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('job')}}">Job</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('procedure')}}">Procedure</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('profile')}}">Profile</a>
+                                </li>
+                            </b>
+                        </div>
+                    {% elif user.is_storemanager %}
+                        <div class="admin_nav">
+                            <li class="navbar-brand" href="/"><strong>JHONSON</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('storemanager')}}">Home</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('grn')}}">GRN</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('progress')}}">Progress</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('procedure')}}">Procedure</a>
+                                </li>
+                            </b>
+                            <li class="navbar-brand"><strong>|</strong></li>
+                            <b>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('profile')}}">Profile</a>
+                                </li>
+                            </b>
+                        </div>
+                    {% endif %}
+                {% else %}
+                <a class="navbar-brand" href="/" style="font-weight: 600;">ProdIntel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% if 'user_id' in session %}
+    <div class="mx-auto p-2">
+        <span></span>
+        <a href="{{url_for('logout')}}" class="btn btn-outline-danger">Logout</a>
+    </div>
+    {% endif %} 
+</nav>
+
+<style>
+    .admin_nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .admin_nav .nav-item {
+        margin: 0 15px;
+    }
+    .admin_nav .navbar-brand {
+        margin: 0 5px;
+    }
+    .customer_nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .customer_nav .nav-item {
+        margin: 0 15px;
+    }
+    .customer_nav .navbar-brand {
+        margin: 0 5px;
+    }
+    .professional_nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .professional_nav .nav-item {
+        margin: 0 15px;
+    }
+    .professional_nav .navbar-brand {
+        margin: 0 5px;
+    }
+</style>
